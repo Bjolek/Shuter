@@ -1,4 +1,6 @@
 import pygame
+import Bullet
+
 class Spaceship:
     def __init__(self, x, y, w, h, speed, texture):
         self.speed = speed
@@ -18,3 +20,11 @@ class Spaceship:
             self.hit_box.x += self.speed
         if keys[pygame.K_a]:
             self.hit_box.x -= self.speed
+
+        for d in self.bulles:
+            d.move()
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_SPACE]:
+            self.bulles.append(Bullet.Bullet(self.hit_box.x, self.hit_box.y, 10, 5, 6, "bullet.png"))
+
