@@ -1,10 +1,25 @@
 import pygame
 import Rocket
+import asteroid
+import random
 
 window = pygame.display.set_mode((800, 500))
 fps = pygame.time.Clock()
 
-Ship = Rocket.Spaceship(250, 350,50,50,10,"rocket.png")
+fon = pygame.image.load("galaxy.jpg")
+fon = pygame.transform.scale(fon, (800, 500))
+
+Ship = Rocket.Spaceship(350, 350,100,150,10,"rocket.png")
+
+stones = []
+
+stones.append(asteroid.Asteroid(random.randint(50, 750), -500, 70, 70, random.randint(1, 5), "asteroid.png") )
+stones.append(asteroid.Asteroid(random.randint(50, 750), -500, 70, 70, random.randint(1, 5), "asteroid.png") )
+stones.append(asteroid.Asteroid(random.randint(50, 750), -500, 70, 70, random.randint(1, 5), "asteroid.png") )
+stones.append(asteroid.Asteroid(random.randint(50, 750), -500, 70, 70, random.randint(1, 5), "asteroid.png") )
+stones.append(asteroid.Asteroid(random.randint(50, 750), -500, 70, 70, random.randint(1, 5), "asteroid.png") )
+stones.append(asteroid.Asteroid(random.randint(50, 750), -500, 70, 70, random.randint(1, 5), "asteroid.png") )
+game = True
 
 
 game = True
@@ -17,8 +32,19 @@ while game:
             game = False
             pygame.quit()
 
-    window.fill((123, 123, 123))
+    window.blit(fon, [0 , 0])
     Ship.render(window)
     Ship.move()
+    for elem in stones:
+        elem.move()
+        if elem.hit_box.y > 800:
+            elem.hit_box.y = -10
+            elem.hit_box.x = (random.randint(1, 5))
+    for asteroid in stones:
+        if asteroid.hit_box.colliderect(Ship.hit_box):
+            game = False
+
+    for asteroid in stones:
+        asteroid.render(window)
     pygame.display.flip()
     fps.tick(60)
