@@ -9,7 +9,7 @@ fps = pygame.time.Clock()
 fon = pygame.image.load("galaxy.jpg")
 fon = pygame.transform.scale(fon, (800, 500))
 
-Ship = Rocket.Spaceship(350, 350,100,150,10,"rocket.png")
+Ship = Rocket.Spaceship(350, 350, 100, 150, 10, "rocket.png")
 
 stones = []
 
@@ -25,9 +25,6 @@ game = True
 game = True
 while game:
     for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            x, y = pygame.mouse.get_pos()
-            print(x, y)
         if event.type == pygame.QUIT:
             game = False
             pygame.quit()
@@ -46,5 +43,11 @@ while game:
 
     for asteroid in stones:
         asteroid.render(window)
+
+    for A in stones:
+        for B in Ship.bulles:
+            if A.hit_box.colliderect(B.hit_box):
+                A.hit_box.y = -500
+
     pygame.display.flip()
     fps.tick(60)
