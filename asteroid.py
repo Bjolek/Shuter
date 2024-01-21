@@ -14,4 +14,3 @@ class Asteroid:
 
     def move(self):
             self.hit_box.y += self.speed
-
