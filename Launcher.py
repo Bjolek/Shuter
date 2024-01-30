@@ -25,7 +25,15 @@ read_data()
 def buy_skin_1():
     if settings["money"] >= 100:
         settings["money"] -= 100
-        settings["skin"] = "asteroid.png"
+        settings["skin"] = "Spaseship.jpg"
+        write_data()
+    else:
+        print("Грошей не хватає!!!!!")
+
+def buy_skin_2():
+    if settings["money"] >= 100:
+        settings["money"] -= 100
+        settings["skin"] = "ufo.png"
         write_data()
     else:
         print("Грошей не хватає!!!!!")
@@ -34,18 +42,29 @@ Knopka = QPushButton("Іграти")
 Line = QLineEdit(settings["skin"])
 Change = QPushButton("Change")
 Skin1 = QLabel("Картинка")
-Skin1_img = QPixmap("asteroid.png")
+Skin1_img = QPixmap("Spaseship.jpg")
 Skin1_img = Skin1_img.scaledToWidth(64)
 Skin1.setPixmap(Skin1_img)
 Buy = QPushButton("Купити")
+
+Skin2 = QLabel("Картинка")
+Skin2_img = QPixmap("ufo.png")
+Skin2_img = Skin2_img.scaledToWidth(64)
+Skin2.setPixmap(Skin2_img)
+Buy2 = QPushButton("Купити")
 mainLine = QVBoxLayout()
 
 mainLine.addWidget(Knopka)
 mainLine.addWidget(Line)
 mainLine.addWidget(Change)
+
 mainLine.addWidget(Skin1)
 mainLine.addWidget(Buy)
 Buy.clicked.connect(buy_skin_1)
+
+mainLine.addWidget(Skin2)
+mainLine.addWidget(Buy2)
+Buy.clicked.connect(buy_skin_2)
 
 window.setLayout(mainLine)
 
